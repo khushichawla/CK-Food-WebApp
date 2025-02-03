@@ -8,7 +8,6 @@ function App() {
     <div className="App">
       <Navbar/>
       <Routes>
-        {/* <Home/> */}
         <Route path="/" element={<Home/>}/>
         {/* <Route path="/cart" element={<Cart/>}/>
         <Route path="/order" element={<PlaceOrder/>}/>
