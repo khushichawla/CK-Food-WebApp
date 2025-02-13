@@ -20,6 +20,12 @@
     font-size: 18px;
 }
 
+.navbar-menu a,
+.navbar-menu .active {
+    color: inherit;
+    text-decoration: none;
+}
+
 .navbar-right {
     display: flex;
     align-items: center;
@@ -62,4 +68,49 @@
     border-radius: 5px;
     top: -10px;
     right: -8px;
+}
+
+@media (max-width:1050px) {
+    .navbar {
+        width: 140px;
+    }
+    .logo {
+        padding: 10px 20px;
+    }
+    .navbar-menu {
+        gap: 20px;
+        font-size: 17px;
+        padding-left: 60px;
+    }
+    .navbar-right {
+        gap: 30px;
+        padding-left: 60px;
+    }
+    .navbar-right button {
+        padding: 10px 35px;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width:900px) {
+    .navbar {
+        width: 120px;
+    }
+    .navbar-menu {
+        gap: 15px;
+        font-size: 16px;
+    }
+    .navbar-right {
+        gap: 20px;
+        padding-left: 50px;
+    }
+    .navbar-right button {
+        padding: 8px 20px;
+    }
+}
+
+@media (max-width:750px) {
+    .navbar-menu {
+        display: none;
+    }
 }

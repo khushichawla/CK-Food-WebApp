@@ -7,18 +7,18 @@ import { StoreContext } from '../../context/StoreContext';
 
 const FoodItem = ({id, name, price, description, image}) => {
   const [itemCount, setItemCount] = useState(0);
-  // const [cartItems, addToCart, removeFromCart] = useContext(StoreContext)
+  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
 
   return (
     <div className='food-item'>
       <div className='food-item-image-container'>
         <img className='food-item-image' src={image} alt=""/>
-        {!itemCount 
-          ? <FiPlus className='add' onClick={() => setItemCount(prev => prev + 1)}/>
+        {!cartItems[id] 
+          ? <FiPlus className='add' onClick={() => addToCart(id)}/>
           : <div className='food-item-counter'>
-            <CiCircleMinus onClick={() => setItemCount(prev => prev - 1)}/>
-            <p>{itemCount}</p>
-            <CiCirclePlus  onClick={() => setItemCount(prev => prev + 1)}/>
+            <CiCircleMinus onClick={() => removeFromCart(id)}/>
+            <p>{cartItems[id]}</p>
+            <CiCirclePlus  onClick={() => addToCart(id)}/>
           </div>
 
         }

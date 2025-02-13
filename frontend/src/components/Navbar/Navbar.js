@@ -2,45 +2,44 @@ import React, { useState } from "react";
 import "./Navbar.css";
 import { FaSearch } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({setShowLogin}) => {
   const [menu, setMenu] = useState("home");
   return (
     <div className="navbar">
       <div className="logo">CKFood.</div>
       <ul className="navbar-menu">
-        <li
+        <Link to='/'
           onClick={() => setMenu("home")}
           className={menu === "home" ? "active" : ""}
         >
           Home
-        </li>
-        <li
+        </Link>
+        <a href='#explore-menu'
           onClick={() => setMenu("profile")}
           className={menu === "profile" ? "active" : ""}
         >
-          Profile
-        </li>
+          Menu
+        </a>
         <li
           onClick={() => setMenu("cart")}
           className={menu === "cart" ? "active" : ""}
         >
           Cart
         </li>
-        <li
-          onClick={() => setMenu("mobile-app")}
-          className={menu === "mobile-app" ? "active" : ""}
-        >
-          Mobile-App
-        </li>
       </ul>
       <div className="navbar-right">
-        <FaSearch />
+        <span className="icon">
+          <FaSearch />
+        </span>
         <div className="navbar-search-icon">
-          <FaShoppingCart />
+          {/* <span className="icon"> */}
+            <FaShoppingCart />
+          {/* </span> */}
           <div className="dot"></div>
         </div>
-        <button>Sign In</button>
+        <button onClick={()=>setShowLogin(true)}>Sign In</button>
       </div>
     </div>
   );
