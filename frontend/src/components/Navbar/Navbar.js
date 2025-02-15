@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Navbar.css";
 import { FaSearch } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { StoreContext } from '../../context/StoreContext';
 
 const Navbar = ({setShowLogin}) => {
   const [menu, setMenu] = useState("home");
+  const { getTotalCartAmount } = useContext(StoreContext);
+
   return (
     <div className="navbar">
       <div className="logo">CKFood.</div>
@@ -35,9 +38,9 @@ const Navbar = ({setShowLogin}) => {
         </span>
         <div className="navbar-search-icon">
           {/* <span className="icon"> */}
-            <FaShoppingCart />
+            <Link to='/cart'><FaShoppingCart /></Link>
           {/* </span> */}
-          <div className="dot"></div>
+          <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
         </div>
         <button onClick={()=>setShowLogin(true)}>Sign In</button>
       </div>

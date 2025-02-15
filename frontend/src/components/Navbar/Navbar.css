@@ -74,9 +74,6 @@
     .navbar {
         width: 140px;
     }
-    .logo {
-        padding: 10px 20px;
-    }
     .navbar-menu {
         gap: 20px;
         font-size: 17px;
@@ -112,5 +109,8 @@
 @media (max-width:750px) {
     .navbar-menu {
         display: none;
+    }
+    .logo {
+        font-size: 2rem;
     }
 }

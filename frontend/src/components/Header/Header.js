@@ -7,7 +7,7 @@ const Header = () => {
       <div className="header-contents">
         <h2>Order your favourite food here</h2>
         <p>
-          Choose from a variety of menu everyday. Make healthy choices with our
+          Choose from a variety of meals everyday. Make healthy choices with our
           delectable array of dishes crafted with the finest ingredients and
           homely vibes.
         </p>

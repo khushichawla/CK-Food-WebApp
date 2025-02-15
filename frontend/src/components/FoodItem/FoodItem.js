@@ -6,7 +6,7 @@ import { FiPlus } from "react-icons/fi";
 import { StoreContext } from '../../context/StoreContext';
 
 const FoodItem = ({id, name, price, description, image}) => {
-  const [itemCount, setItemCount] = useState(0);
+  // const [itemCount, setItemCount] = useState(0);
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
 
   return (
