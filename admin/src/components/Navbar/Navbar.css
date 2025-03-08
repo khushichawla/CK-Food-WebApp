@@ -1,0 +1,18 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 4%;
+}
+
+.logo {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #f69b2c;
+    align-items: left;
+}
+
+.navbar .logo {
+    width: max(10%, 80px);
+}
+
