@@ -17,7 +17,7 @@ const addFood = async(req, res) => {
     })
     try {
         await food.save(); // saves the food item in db
-        res.json({sucess:true, message:"Food Added"})
+        res.json({success:true, message:"Food Added"})
     } catch (error) {
         console.log(error)
         res.json({success:false, message:"Error"})
