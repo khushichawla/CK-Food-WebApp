@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './Add.css'
 import axios from "axios"
+import { toast } from 'react-toastify'
 // import { useEffect } from 'react';
 
 const Add = () => {
@@ -35,7 +36,6 @@ const Add = () => {
         formData.append("image", image);
 
         const response = await axios.post(`${url}/api/food/add`, formData)
-
         if (response.data.success) {
             setData({
                 name:"",
@@ -45,8 +45,9 @@ const Add = () => {
                 quantity:""
             })
             setImage(false)
+            toast.success(response.data.message);
         } else {
-
+            toast.error(response.data.message)
         }
     }
 
