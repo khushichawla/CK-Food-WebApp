@@ -2,12 +2,21 @@ import React, { useState, useContext } from "react";
 import "./Navbar.css";
 import { FaSearch } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { IoPersonSharp } from "react-icons/io5";
+import { IoBagHandle } from "react-icons/io5";
+import { MdLogout } from "react-icons/md";
+import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext';
 
 const Navbar = ({setShowLogin}) => {
   const [menu, setMenu] = useState("home");
-  const { getTotalCartAmount } = useContext(StoreContext);
+  const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    navigate("/");
+  }
 
   return (
     <div className="navbar">
@@ -42,7 +51,16 @@ const Navbar = ({setShowLogin}) => {
           {/* </span> */}
           <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
         </div>
-        <button onClick={()=>setShowLogin(true)}>Sign In</button>
+        {!token ? <button onClick={()=>setShowLogin(true)}>Sign In</button>
+        :<div className="navbar-profile">
+          {/* <img src="" /> */}
+          <IoPersonSharp />
+          <ul className="nav-profile-dropdown">
+            <li><IoBagHandle /><p>Orders</p></li>
+            <hr/>
+            <li onClick={logout}><MdLogout /><p>Logout</p></li>
+          </ul>
+        </div>}
       </div>
     </div>
   );
