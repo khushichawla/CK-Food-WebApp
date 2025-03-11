@@ -4,6 +4,7 @@ import { connectDB } from "./config/db.js"
 import foodRouter from "./routes/foodRoute.js"
 import userRouter from "./routes/userRoute.js"
 import 'dotenv/config'
+import cartRouter from "./routes/cartRoute.js"
 
 
 // app config
@@ -22,6 +23,7 @@ connectDB();
 app.use("/api/food", foodRouter)
 app.use("/images", express.static("uploads")) // /images endpoint that exposes the uploads folder
 app.use("/api/user", userRouter)
+app.use("/api/cart", cartRouter)
 
 
 // http method to request data from server, other methods like delete, post etc

@@ -30,12 +30,13 @@ const LoginPopup = ({setShowLogin}) => {
     }
 
     const response = await axios.post(newUrl, data);
-
+    // console.log('what is in response data:', response.data.success)
     if (response.data.success) {
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
       setShowLogin(false);
     } else {
+      // alert("An unexpected error occurred. Please try again.");
       alert(response.data.message);
     }
   }

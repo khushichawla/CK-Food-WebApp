@@ -27,7 +27,7 @@ const loginUser = async (req, res) => {
 };
 
 const createToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET);
+  return jwt.sign({id}, process.env.JWT_SECRET);
 };
 
 // register user
@@ -36,7 +36,7 @@ const registerUser = async (req, res) => {
   try {
     // to check if user already exists
     const exists = await userModel.findOne({ email });
-    console.log("seeing what is in exists", exists);
+    // console.log("seeing what is in exists", exists);
     if (exists) {
         return res.json({success:false, message:"User Already Exists"})
     }
@@ -62,10 +62,10 @@ const registerUser = async (req, res) => {
       email: email,
       password: hashedPassword,
     });
-
     const user = await newUser.save();
     const token = createToken(user._id);
-    res.json({ sucess: true, token });
+
+    res.json({ success: true, token });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: "Error" });
