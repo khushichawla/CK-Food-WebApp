@@ -1,9 +1,9 @@
 import express from "express"
 import authMiddleware from "../middleware/auth.js"
-import {placeHolder} from "../controllers/orderController.js"
+import {placeOrder} from '../controllers/orderController.js'
 
 const orderRouter = express.Router();
 
-orderRouter.post("/place", authMiddleware, placeHolder)
+orderRouter.post("/place", authMiddleware, placeOrder)
 
 export default orderRouter;
