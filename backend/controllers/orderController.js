@@ -14,9 +14,11 @@ const placeOrder = async (req, res) => {
         })
         await newOrder.save();
         await userModel.findByIdAndUpdate(req.body.userId, {cartData:{}}) // clears the cart data
-         
-    } catch (error) {
         
+        res.json({success:true, message:"Order placed"});
+    } catch (error) {
+        console.log(error)
+        res.json({success:false, message:"Error"});
     }
 }
 
