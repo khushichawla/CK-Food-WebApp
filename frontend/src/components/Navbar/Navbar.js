@@ -56,7 +56,7 @@ const Navbar = ({setShowLogin}) => {
           {/* <img src="" /> */}
           <IoPersonSharp />
           <ul className="nav-profile-dropdown">
-            <li><IoBagHandle /><p>Orders</p></li>
+            <li onClick={()=>navigate('/myorders')}><IoBagHandle /><p>Orders</p></li>
             <hr/>
             <li onClick={logout}><MdLogout /><p>Logout</p></li>
           </ul>

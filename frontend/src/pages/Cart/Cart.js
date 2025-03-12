@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate } from "react-router";
 import './Cart.css'
 import { StoreContext } from '../../context/StoreContext';
@@ -35,6 +35,14 @@ const Cart = () => {
       alert("Error")
     }
   }
+
+  useEffect(()=>{
+    if (!token) {
+      navigate("/cart")
+    } else if (getTotalCartAmount === 0) {
+      navigate("/cart")
+    }
+  }, [token])
 
   return (
     <div className='cart'>
