@@ -9,7 +9,7 @@ const loginUser = async (req, res) => {
 
   try {
     const user = await userModel.findOne({ email });
-    console.log('user being tested: ', user)
+    // console.log('user being tested: ', user)
     if (!user) {
       return res.json({ success: false, message: "User does not exist" });
     }
