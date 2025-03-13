@@ -7,14 +7,22 @@ const Orders = ({url}) => {
   const [orders, setOrders] = useState([])
   
   const fetchAllOrders = async () => {
-    const response = await axios.get(url + "/api/order/list")
-    if (response.data.success) {
-      setOrders(response.data.data)
-      console.log(response.data.data)
-    } else {
-      toast.error("Error")
+    try {
+      const response = await axios.get(url + "/api/order/list");
+      if (response.data.success) {
+        // Filter out canceled orders
+        const filteredOrders = response.data.data.filter(order => order.status !== "Canceled");
+        setOrders(filteredOrders);
+        console.log(filteredOrders);
+      } else {
+        toast.error("Error fetching orders");
+      }
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      toast.error("Error fetching orders");
     }
-  }
+  };
+
 
   const statusHandler = async (event, orderId) => {
     console.log(orderId)

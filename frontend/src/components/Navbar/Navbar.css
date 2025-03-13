@@ -10,6 +10,7 @@
     font-weight: 800;
     color: #f69b2c;
     align-items: left;
+    cursor: pointer;
 }
 
 .navbar-menu {

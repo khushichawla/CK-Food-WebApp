@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import axios from 'axios';
 
 const Cart = () => {
-  const {cartItems, food_list, removeFromCart, getTotalCartAmount, getTotalCartQuantity, url, token} = useContext(StoreContext);
+  const {cartItems, food_list, removeFromCart, getTotalCartAmount, getTotalCartQuantity, resetCart, url, token} = useContext(StoreContext);
   const navigate = useNavigate();
 
   const placeOrder = async (event) => {
@@ -29,6 +29,7 @@ const Cart = () => {
     if (response.data.success) {
       // const {session_url} = response.data;
       // window.location.replace(session_url);
+      resetCart();
       toast.success("Order Placed Successfully");
       navigate("/myorders");
     } else {

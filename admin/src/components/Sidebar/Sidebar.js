@@ -1,6 +1,8 @@
 import React from "react";
 import "./Sidebar.css";
 import { NavLink } from "react-router-dom";
+import { IoListSharp } from "react-icons/io5";
+import { LuPackageOpen } from "react-icons/lu";
 
 const Sidebar = () => {
   return (
@@ -12,12 +14,12 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink to='/list' className="sidebar-option">
-          <div>+</div>
+          <div><IoListSharp /></div>
           <p>List Items</p>
         </NavLink>
 
         <NavLink to='/orders' className="sidebar-option">
-          <div>+</div>
+          <div><LuPackageOpen /></div>
           <p>Orders</p>
         </NavLink>
 

@@ -21,6 +21,31 @@ const placeOrder = async (req, res) => {
     }
 }
 
+// cancel user order from frontend
+const cancelOrder = async (req, res) => {
+    try {
+        const { orderId } = req.body;
+        const order = await orderModel.findById(orderId);
+
+        if (!order) {
+            return res.json({ success: false, message: "Order not found" });
+        }
+
+        // Check if the order status is "Order Pending"
+        if (order.status !== "Order Pending") {
+            return res.json({ success: false, message: "Order cannot be canceled" });
+        }
+
+        order.status = "Canceled"; // Update status as needed
+        await order.save(); // Save the updated order
+        
+        res.json({success:true, message:"Order Canceled"});
+    } catch (error) {
+        console.log(error)
+        res.json({success:false, message:"Error"});
+    }
+}
+
 // user orders for frontend
 const userOrder = async (req, res) => {
     try {
@@ -55,4 +80,4 @@ const updateStatus = async (req, res) => {
     }
 }
 
-export {placeOrder, userOrder, listOrders, updateStatus};
+export {placeOrder, cancelOrder, userOrder, listOrders, updateStatus};

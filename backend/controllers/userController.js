@@ -5,10 +5,10 @@ import validator from "validator";
 
 // login user
 const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { phone, password } = req.body;
 
   try {
-    const user = await userModel.findOne({ email });
+    const user = await userModel.findOne({ phone });
     // console.log('user being tested: ', user)
     if (!user) {
       return res.json({ success: false, message: "User does not exist" });
@@ -32,19 +32,19 @@ const createToken = (id) => {
 
 // register user
 const registerUser = async (req, res) => {
-  const { name, password, email } = req.body;
+  const { name, password, phone } = req.body;
   try {
     // to check if user already exists
-    const exists = await userModel.findOne({ email });
+    const exists = await userModel.findOne({ phone });
     // console.log("seeing what is in exists", exists);
     if (exists) {
         return res.json({success:false, message:"User Already Exists"})
     }
 
-    // validating email format and strong password
-    if (!validator.isEmail(email)) {
-      return res.json({ success: false, message: "Please enter valid email" });
-    }
+    // validating phone format and strong password
+    // if (!validator.isphone(phone)) {
+    //   return res.json({ success: false, message: "Please enter valid phone" });
+    // }
 
     if (password.length < 8) {
       return res.json({
@@ -59,7 +59,7 @@ const registerUser = async (req, res) => {
 
     const newUser = new userModel({
       name: name,
-      email: email,
+      phone: phone,
       password: hashedPassword,
     });
     const user = await newUser.save();

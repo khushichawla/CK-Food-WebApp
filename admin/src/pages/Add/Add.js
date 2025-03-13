@@ -8,7 +8,7 @@ const Add = ({url}) => {
     const [image, setImage] = useState(false);
     const [data, setData] = useState({
         name:"",
-        description:"",
+        // description:"",
         price:"",
         category:"Breads",
         quantity:""
@@ -28,7 +28,7 @@ const Add = ({url}) => {
         event.preventDefault();
         const formData = new FormData();
         formData.append("name", data.name);
-        formData.append("description", data.description);
+        // formData.append("description", data.description);
         formData.append("price", Number(data.price));
         formData.append("quantity", Number(data.quantity));
         formData.append("category", data.category);
@@ -38,7 +38,7 @@ const Add = ({url}) => {
         if (response.data.success) {
             setData({
                 name:"",
-                description:"",
+                // description:"",
                 price:"",
                 category:"Breads",
                 quantity:""
@@ -64,10 +64,10 @@ const Add = ({url}) => {
             <p>Product Name</p>
             <input onChange={onChangeHandler} value={data.name} type="text" name='name' placeholder='Type here'/>
         </div>
-        <div className='add-product-description flex-col'>
+        {/* <div className='add-product-description flex-col'>
             <p>Product Description</p>
             <textarea onChange={onChangeHandler} value={data.description} name='description' rows="6" placeholder='Write content here'/>
-        </div>
+        </div> */}
         <div className='add-category-price'>
             <div className='add-category flex-col'>
                 <p>Product Category</p>

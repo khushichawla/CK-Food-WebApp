@@ -13,6 +13,23 @@ const MyOrders = () => {
         setData(response.data.data);
     }
 
+    const cancelOrder = async (orderId) => {
+        try {
+            console.log("order id: ", orderId)
+            const response = await axios.post(url + "/api/order/cancel", { orderId }, {
+                headers: { token }
+            });
+            console.log("error: ", response.data.message)
+            if (response.data.success) {
+                // toast.success("Order canceled successfully");
+                fetchOrders(); // Refresh the orders list
+            }
+        } catch (error) {
+            console.error("Error canceling order:", error);
+        }
+    };
+
+
     useEffect(()=>{
         if (token) {
             fetchOrders();
@@ -38,6 +55,9 @@ const MyOrders = () => {
                     <p>Items: {order.items.length}</p>
                     <p><span>&#x25cf;</span><b> {order.status}</b></p>
                     <button onClick={fetchOrders}>Track Order</button>
+                    {order.status === "Order Pending" && (
+                        <button onClick={() => cancelOrder(order._id)}>Cancel</button>
+                    )}
                 </div>
             )
         })}

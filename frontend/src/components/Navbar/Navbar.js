@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import "./Navbar.css";
-import { FaSearch } from "react-icons/fa";
+// import { FaSearch } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
 import { IoBagHandle } from "react-icons/io5";
@@ -20,7 +20,7 @@ const Navbar = ({setShowLogin}) => {
 
   return (
     <div className="navbar">
-      <div className="logo">CKFood.</div>
+      <div  onClick={() => navigate("/")} className="logo">CKFood.</div>
       <ul className="navbar-menu">
         <Link to='/'
           onClick={() => setMenu("home")}
@@ -34,17 +34,17 @@ const Navbar = ({setShowLogin}) => {
         >
           Menu
         </a>
-        <li
+        {/* <li
           onClick={() => setMenu("cart")}
           className={menu === "cart" ? "active" : ""}
         >
           Cart
-        </li>
+        </li> */}
       </ul>
       <div className="navbar-right">
-        <span className="icon">
+        {/* <span className="icon">
           <FaSearch />
-        </span>
+        </span> */}
         <div className="navbar-search-icon">
           {/* <span className="icon"> */}
             <Link to='/cart'><FaShoppingCart /></Link>

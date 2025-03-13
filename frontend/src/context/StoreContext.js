@@ -70,6 +70,10 @@ const StoreContextProvider = (props) => {
             console.error("Error loading cart data:", error);
         }
     }
+
+    const resetCart = () => {
+        setCartItems({});
+    };
     
     // stores the token even if the page is refereshed
     useEffect(() => {
@@ -91,6 +95,7 @@ const StoreContextProvider = (props) => {
         removeFromCart,
         getTotalCartAmount,
         getTotalCartQuantity,
+        resetCart,
         url,
         token,
         setToken

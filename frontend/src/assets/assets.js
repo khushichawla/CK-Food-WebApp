@@ -3,27 +3,23 @@ import food1 from './food1.jpg';
 
 export const menu_list = [
     {
-      menu_name: 'Salad',
+      menu_name: 'Curries',
       menu_image: food1
     },
     {
-      menu_name: 'Pizza',
+      menu_name: 'Breads',
       menu_image: food1
     },
     {
-      menu_name: 'Dessert',
+      menu_name: 'Rice',
       menu_image: food1
     },
     {
-      menu_name: 'Food4',
+      menu_name: 'Sides',
       menu_image: food1
     },
     {
-      menu_name: 'Food5',
-      menu_image: food1
-    },
-    {
-      menu_name: 'Food6',
+      menu_name: 'Miscellaneous',
       menu_image: food1
     }
   ];
