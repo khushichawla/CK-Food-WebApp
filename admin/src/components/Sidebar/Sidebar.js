@@ -23,6 +23,11 @@ const Sidebar = () => {
           <p>Orders</p>
         </NavLink>
 
+        <NavLink to='/summary' className="sidebar-option">
+          <div><LuPackageOpen /></div>
+          <p>Summary</p>
+        </NavLink>
+
       </div>
     </div>
   );
