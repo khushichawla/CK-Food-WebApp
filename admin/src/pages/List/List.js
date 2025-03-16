@@ -25,6 +25,16 @@ const List = ({url}) => {
     }
   }
 
+  const toggleDisplay = async (foodId, currentStatus) => {
+    const response = await axios.post(`${url}/api/food/toggleDisplay`, { id: foodId, display: !currentStatus });
+    if (response.data.success) {
+      toast.success(response.data.message);
+      await fetchList(); // Refresh the list after the toggle
+    } else {
+      toast.error("Error");
+    }
+  };
+
   // fetchlist everytime page is refreshed
   useEffect(()=>{
     fetchList();
@@ -50,7 +60,15 @@ const List = ({url}) => {
               <p>{item.category}</p>
               <p>{item.price}</p>
               <p>{item.quantity}</p>
-              <p onClick={()=>removeFood(item._id)} className='cursor'>X</p>
+              <label className="toggle-switch">
+                  <input 
+                    type="checkbox" 
+                    checked={item.display} 
+                    onChange={() => toggleDisplay(item._id, item.display)} 
+                  />
+                  <span className="slider"></span>
+                </label>
+              {/* <p onClick={()=>removeFood(item._id)} className='cursor'>X</p> */}
             </div>
           )
         })}

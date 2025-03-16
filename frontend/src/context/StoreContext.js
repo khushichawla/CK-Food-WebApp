@@ -12,16 +12,21 @@ const StoreContextProvider = (props) => {
     const [food_list, setFoodlist] = useState([]);
 
     const addToCart = async (itemId) => {
-        if (!cartItems[itemId]) {
-            setCartItems((prev)=>({...prev, [itemId]:1}))
-        } else {
-            setCartItems((prev)=>({...prev, [itemId]:prev[itemId]+1}))
-        }
-
+        setCartItems((prev) => {
+            const updatedCart = { ...prev };
+            updatedCart[itemId] = (updatedCart[itemId] || 0) + 1; // Increment item count
+            console.log("Updated Cart Items:", updatedCart); // Log updated cart items
+            return updatedCart;
+        });
+    
         if (token) {
-            await axios.post(url + "/api/cart/add", {itemId}, {headers:{token}})
+            try {
+                await axios.post(url + "/api/cart/add", { itemId }, { headers: { token } });
+            } catch (error) {
+                console.error("Error adding to cart:", error);
+            }
         }
-    }
+    };
 
     const removeFromCart = async (itemId) => {
         setCartItems((prev)=>({...prev, [itemId]:prev[itemId]-1}))
@@ -65,6 +70,7 @@ const StoreContextProvider = (props) => {
     const loadCartData = async (token) => {
         try {
             const response = await axios.get(url + "/api/cart/get", {headers:{token}});
+            console.log("Loaded Cart Data:", response.data.cartData);
             setCartItems(response.data.cartData);
         } catch (error) {
             console.error("Error loading cart data:", error);
@@ -99,7 +105,10 @@ const StoreContextProvider = (props) => {
         url,
         token,
         setToken
-    }
+    };
+
+    console.log("Context Value:", contextValue); 
+
     return (
         <StoreContext.Provider value={contextValue}>
             {props.children}

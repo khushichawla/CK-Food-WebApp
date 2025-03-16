@@ -7,6 +7,7 @@ const foodSchema = new mongoose.Schema({
     quantity: {type:Number, required:true}, // added quantity myself, check
     image: {type:String, required:true},
     category: {type:String, required:true},
+    display: { type: Boolean, default: true },
 })
 
 
