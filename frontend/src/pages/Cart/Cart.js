@@ -1,31 +1,42 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
-import './Cart.css'
-import { StoreContext } from '../../context/StoreContext';
-import { toast } from 'react-toastify'
-import axios from 'axios';
+import "./Cart.css";
+import { StoreContext } from "../../context/StoreContext";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Cart = () => {
-  const {cartItems, food_list, removeFromCart, getTotalCartAmount, getTotalCartQuantity, resetCart, url, token} = useContext(StoreContext);
+  const {
+    cartItems,
+    food_list,
+    removeFromCart,
+    getTotalCartAmount,
+    getTotalCartQuantity,
+    resetCart,
+    url,
+    token,
+  } = useContext(StoreContext);
   const navigate = useNavigate();
 
   const placeOrder = async (event) => {
     event.preventDefault();
     let orderItems = [];
-    food_list.map((item)=>{
+    food_list.forEach((item) => {
       if (cartItems[item._id] > 0) {
-        let itemInfo = item;
+        let itemInfo = { ...item };
         itemInfo["quantity"] = cartItems[item._id];
-        orderItems.push(itemInfo)
+        orderItems.push(itemInfo);
       }
-    })
+    });
     // console.log(orderItems);
     let orderData = {
-      items:orderItems,
-      amount: getTotalCartAmount()+2
-    }
+      items: orderItems,
+      amount: getTotalCartAmount() + 2,
+    };
 
-    let response = await axios.post(url + "/api/order/place", orderData, {headers:{token}})
+    let response = await axios.post(url + "/api/order/place", orderData, {
+      headers: { token },
+    });
     if (response.data.success) {
       // const {session_url} = response.data;
       // window.location.replace(session_url);
@@ -33,22 +44,22 @@ const Cart = () => {
       toast.success("Order Placed Successfully");
       navigate("/myorders");
     } else {
-      alert("Error")
+      alert("Please Sign Up or Login.");
     }
-  }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (!token) {
-      navigate("/cart")
+      navigate("/cart");
     } else if (getTotalCartAmount === 0) {
-      navigate("/cart")
+      navigate("/cart");
     }
-  }, [token])
+  }, [token, getTotalCartAmount, navigate]);
 
   return (
-    <div className='cart'>
-      <div className='cart-items'>
-        <div className='cart-items-title'>
+    <div className="cart">
+      <div className="cart-items">
+        <div className="cart-items-title">
           <p>Items</p>
           <p>Title</p>
           <p>Price</p>
@@ -56,35 +67,42 @@ const Cart = () => {
           <p>Total</p>
           <p>Remove</p>
         </div>
-        <br/>
-        <hr/>
-        {food_list.map((item, index)=>{
+        <br />
+        <hr />
+        {food_list.map((item, index) => {
           if (cartItems[item._id] > 0) {
             return (
-              <div>
-              <div className='cart-items-title cart-items-item'>
-                <img src={url+"/images/"+item.image} alt=''/>
-                <p>{item.name}</p>
-                <p>${item.price}</p>
-                <p>{cartItems[item._id]}</p>
-                <p>${item.price*cartItems[item._id]}</p>
-                <p onClick={()=>removeFromCart(item._id)} className='cross'>x</p>
+              <div key={item._id}>
+                <div className="cart-items-title cart-items-item">
+                  <img src={url + "/images/" + item.image} alt="" />
+                  <p>{item.name}</p>
+                  <p>${item.price}</p>
+                  <p>{cartItems[item._id]}</p>
+                  <p>${item.price * cartItems[item._id]}</p>
+                  <p onClick={() => removeFromCart(item._id)} className="cross">
+                    x
+                  </p>
+                </div>
+                <hr />
               </div>
-              <hr/>
-              </div>
-            )
+            );
           }
+          return null;
         })}
-        </div>
-        <div className='cart-bottom'>
-          <div className='cart-total'>
-            <h2>Cart Total: <b>$ {getTotalCartAmount()}</b></h2>
-            <h2>Total Items: <b>{getTotalCartQuantity()}</b></h2>
-            <button onClick={placeOrder}>PLACE ORDER</button>
-          </div>
+      </div>
+      <div className="cart-bottom">
+        <div className="cart-total">
+          <h2>
+            Cart Total: <b>$ {getTotalCartAmount()}</b>
+          </h2>
+          <h2>
+            Total Items: <b>{getTotalCartQuantity()}</b>
+          </h2>
+          <button onClick={placeOrder}>PLACE ORDER</button>
         </div>
       </div>
-  )
-}
+    </div>
+  );
+};
 
-export default Cart
+export default Cart;

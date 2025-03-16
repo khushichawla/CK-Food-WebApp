@@ -29,7 +29,10 @@ const Navbar = ({setShowLogin}) => {
           Home
         </Link>
         <a href='#explore-menu'
-          onClick={() => setMenu("profile")}
+          onClick={() => {
+            setMenu("profile");
+            navigate("/#explore-menu"); // Navigate to the path without staying on /cart
+        }}
           className={menu === "profile" ? "active" : ""}
         >
           Menu
