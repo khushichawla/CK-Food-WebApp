@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from './components/Navbar/Navbar'
+import NavbarAdmin from './components/NavbarAdmin/NavbarAdmin'
 import Sidebar from './components/Sidebar/Sidebar'
 import { Routes, Route } from 'react-router-dom'
 import Add from './pages/Add/Add'
@@ -15,7 +15,7 @@ const App = () => {
   return (
     <div>
       <ToastContainer/>
-      <Navbar/>
+      <NavbarAdmin/>
       <hr/>
       <div className='app-content'>
         <Sidebar/>

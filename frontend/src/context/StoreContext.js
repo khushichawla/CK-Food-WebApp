@@ -1,24 +1,22 @@
 import React, { createContext, useEffect, useState } from "react";
-import axios from 'axios'
-// import { food_list} from "../assets/assets";
+import axios from 'axios';
 
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-
     const [cartItems, setCartItems] = useState({});
-    const url = "http://localhost:4000";
+    const [url] = useState("http://localhost:4000");
     const [token, setToken] = useState("");
+    const [userRole, setUserRole] = useState(""); // Add user role state
     const [food_list, setFoodlist] = useState([]);
 
     const addToCart = async (itemId) => {
         setCartItems((prev) => {
             const updatedCart = { ...prev };
             updatedCart[itemId] = (updatedCart[itemId] || 0) + 1; // Increment item count
-            console.log("Updated Cart Items:", updatedCart); // Log updated cart items
             return updatedCart;
         });
-    
+
         if (token) {
             try {
                 await axios.post(url + "/api/cart/add", { itemId }, { headers: { token } });
@@ -29,69 +27,59 @@ const StoreContextProvider = (props) => {
     };
 
     const removeFromCart = async (itemId) => {
-        setCartItems((prev)=>({...prev, [itemId]:prev[itemId]-1}))
-        
-        // if user is logged in
+        setCartItems((prev) => {
+            const updatedCart = { ...prev };
+            updatedCart[itemId] = Math.max(0, updatedCart[itemId] - 1); // Prevent negative count
+            return updatedCart;
+        });
+
         if (token) {
-            await axios.post(url + "/api/cart/remove", {itemId}, {headers:{token}});
+            await axios.post(url + "/api/cart/remove", { itemId }, { headers: { token } });
         }
-    }
+    };
 
     const getTotalCartAmount = () => {
-        let totalAmount = 0;
-
-        for (const item in cartItems) {
-            if (cartItems[item] > 0) {
-                let itemInfo = food_list.find((product) => product._id === item);
-                totalAmount += itemInfo.price*cartItems[item];
-            }
-        }
-
-        return totalAmount;
-    }
+        return Object.keys(cartItems).reduce((total, item) => {
+            const itemInfo = food_list.find((product) => product._id === item);
+            return total + (itemInfo ? itemInfo.price * cartItems[item] : 0);
+        }, 0);
+    };
 
     const getTotalCartQuantity = () => {
-        let totalQuantity = 0;
-
-        for (const item in cartItems) {
-            if (cartItems[item] > 0) {
-                totalQuantity += cartItems[item];
-            }
-        }
-
-        return totalQuantity;
-    }
+        return Object.values(cartItems).reduce((total, count) => total + count, 0);
+    };
 
     const fetchFoodList = async () => {
-        const response = await axios.get(url+"/api/food/list")
+        const response = await axios.get(url + "/api/food/list");
         setFoodlist(response.data.data);
-    }
+    };
 
     const loadCartData = async (token) => {
         try {
-            const response = await axios.get(url + "/api/cart/get", {headers:{token}});
-            console.log("Loaded Cart Data:", response.data.cartData);
+            const response = await axios.get(url + "/api/cart/get", { headers: { token } });
             setCartItems(response.data.cartData);
         } catch (error) {
             console.error("Error loading cart data:", error);
         }
-    }
+    };
 
     const resetCart = () => {
         setCartItems({});
     };
-    
-    // stores the token even if the page is refereshed
+
     useEffect(() => {
         async function loadData() {
             await fetchFoodList();
-            if (localStorage.getItem("token")) {
-                setToken(localStorage.getItem("token"));
-                await loadCartData(localStorage.getItem("token"));
+            const storedToken = localStorage.getItem("token");
+            const storedRole = localStorage.getItem("userRole");
+            if (storedToken) {
+                setToken(storedToken);
+                setUserRole(storedRole || ""); // Set user role
+                await loadCartData(storedToken);
             }
         }
         loadData();
-    },[])
+    }, []);
 
     const contextValue = {
         food_list,
@@ -104,16 +92,16 @@ const StoreContextProvider = (props) => {
         resetCart,
         url,
         token,
-        setToken
+        setToken,
+        userRole, // Provide userRole in context
+        setUserRole // Provide setUserRole in context
     };
-
-    console.log("Context Value:", contextValue); 
 
     return (
         <StoreContext.Provider value={contextValue}>
             {props.children}
         </StoreContext.Provider>
-    )
-}
+    );
+};
 
-export default StoreContextProvider
+export default StoreContextProvider;

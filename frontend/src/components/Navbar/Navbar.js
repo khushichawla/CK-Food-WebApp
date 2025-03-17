@@ -1,26 +1,27 @@
 import React, { useState, useContext } from "react";
 import "./Navbar.css";
-// import { FaSearch } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
-import { IoBagHandle } from "react-icons/io5";
-import { MdLogout } from "react-icons/md";
+import { IoIosLogOut } from "react-icons/io"; // Logout icon
+import { FaClipboardList } from "react-icons/fa"; // Orders icon
 import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext';
 
-const Navbar = ({setShowLogin}) => {
+const Navbar = () => {
   const [menu, setMenu] = useState("home");
   const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
+  
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userRole");
     setToken("");
-    navigate("/");
-  }
+    navigate("/login");
+  };
 
   return (
     <div className="navbar">
-      <div  onClick={() => navigate("/")} className="logo">CKFood.</div>
+      <div onClick={() => navigate("/")} className="logo">CKFood.</div>
       <ul className="navbar-menu">
         <Link to='/'
           onClick={() => setMenu("home")}
@@ -31,39 +32,32 @@ const Navbar = ({setShowLogin}) => {
         <a href='#explore-menu'
           onClick={() => {
             setMenu("profile");
-            navigate("/#explore-menu"); // Navigate to the path without staying on /cart
-        }}
+            navigate("/#explore-menu");
+          }}
           className={menu === "profile" ? "active" : ""}
         >
           Menu
         </a>
-        {/* <li
-          onClick={() => setMenu("cart")}
-          className={menu === "cart" ? "active" : ""}
-        >
-          Cart
-        </li> */}
       </ul>
       <div className="navbar-right">
-        {/* <span className="icon">
-          <FaSearch />
-        </span> */}
         <div className="navbar-search-icon">
-          {/* <span className="icon"> */}
-            <Link to='/cart'><FaShoppingCart /></Link>
-          {/* </span> */}
+          <Link to='/cart'><FaShoppingCart /></Link>
           <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
         </div>
-        {!token ? <button onClick={()=>setShowLogin(true)}>Sign In</button>
-        :<div className="navbar-profile">
-          {/* <img src="" /> */}
-          <IoPersonSharp />
-          <ul className="nav-profile-dropdown">
-            <li onClick={()=>navigate('/myorders')}><IoBagHandle /><p>Orders</p></li>
-            <hr/>
-            <li onClick={logout}><MdLogout /><p>Logout</p></li>
-          </ul>
-        </div>}
+        {!token ? (
+          <div onClick={() => navigate('/login')}><button>Sign In</button></div>
+        ) : (
+            <div className="navbar-icons">
+              <FaClipboardList 
+                onClick={() => navigate('/myorders')} 
+                style={{ cursor: 'pointer', margin: '0 10px' }} 
+              />
+              <IoIosLogOut 
+                onClick={logout} 
+                style={{ cursor: 'pointer', margin: '0 10px' }} 
+              />
+            </div>
+        )}
       </div>
     </div>
   );

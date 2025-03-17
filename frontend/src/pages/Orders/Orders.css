@@ -1,0 +1,87 @@
+.order-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    align-items: start;
+    gap: 30px;
+    border: 1px solid tomato;
+    padding: 20px;
+    margin: 30px 0px;
+    font-size: 18px;
+    color: #505050;
+    justify-content: space-between; /* Spread items across the width */
+}
+
+.order-item-food {
+    font-weight: 600;
+}
+
+.order-item-info {
+    margin-top: 20px;
+}
+
+.order-item select {
+    background-color: #ffe8e4;
+    border: 1px solid tomato;
+    width: max(11vw, 120px); /* Corrected typo (changed from 10xw to 10vw) */
+    padding: 10px;
+    outline: none;
+}
+
+.filter-options {
+    margin-bottom: 20px;
+}
+  
+.filter-button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    border-radius: 5px;
+}
+  
+.filter-button.active {
+    background-color: #007bff; /* Active button color */
+    color: white; /* Text color for active button */
+}
+
+@media (max-width: 1000px) {
+    .order-item {
+        font-size: 18px;
+        grid-template-columns: 2fr 1fr; /* Adjusting for smaller screens */
+        padding: 15px 8px;
+        justify-content: space-between; /* Ensure items are spaced out on smaller screens */
+    }
+    
+    .order-item select {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    .filter-button {
+        padding: 3px 6px;
+        margin-top: 5px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .order-item {
+        grid-template-columns: 1fr; /* Stack items in a single column */
+        font-size: 16px; /* Smaller font size for mobile */
+        padding: 10px 5px;
+    }
+
+    .order-item-info {
+        margin-top: 15px;
+    }
+
+    .filter-button {
+        padding: 3px 6px;
+        font-size: 14px;
+    }
+    .order-item select {
+        padding: 10px;
+        font-size: 14px;
+    }
+}

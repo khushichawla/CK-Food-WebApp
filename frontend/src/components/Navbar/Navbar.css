@@ -1,24 +1,24 @@
 .navbar {
-    padding: 20px 0px;
+    padding: 10px 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: nowrap;
 }
 
 .logo {
-    font-size: 3rem;
+    font-size: 3rem; /* Reduced logo size */
     font-weight: 800;
     color: #f69b2c;
-    align-items: left;
     cursor: pointer;
 }
 
 .navbar-menu {
     display: flex;
     list-style: none;
-    gap: 20px;
+    gap: 15px;
     color: black;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .navbar-menu a,
@@ -30,16 +30,48 @@
 .navbar-right {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 10px; /* Adjusted gap between icons */
+}
+
+.navbar-search-icon {
+    position: relative;
+    display: flex;
+    font-size: 20px;
+}
+
+.navbar-search-icon .dot {
+    position: absolute;
+    min-width: 10px;
+    min-height: 10px;
+    background-color: tomato;
+    border-radius: 5px;
+    top: -10px;
+    right: -8px;
+}
+
+.navbar-icons {
+    /* display: flex; */
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-icons svg {
+    font-size: 20px; /* Uniform icon size */
+    color: black;
+    cursor: pointer;
+}
+
+.navbar-icons svg:hover {
+    color: #f69b2c;
 }
 
 .navbar button {
     background: transparent;
-    font-size: 16px;
+    font-size: 14px;
     color: black;
     border: 1px solid #f69b2c;
-    padding: 10px 30px;
-    border-radius:  50px;
+    padding: 8px 15px; /* Adjusted padding */
+    border-radius: 50px;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -57,95 +89,35 @@
     cursor: pointer;
 }
 
-.navbar-search-icon {
-    position: relative;
-}
-
-.navbar-search-icon .dot {
-    position: absolute;
-    min-width: 10px;
-    min-height: 10px;
-    background-color: tomato;
-    border-radius: 5px;
-    top: -10px;
-    right: -8px;
-}
-
-.navbar-profile {
-    position: relative;
-}
-
-.nav-profile-dropdown {
-    position: absolute;
-    display: none;
-    right: 0;
-    z-index: 1;
-}
-
-.navbar-profile:hover .nav-profile-dropdown {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: #fff2ef;
-    padding: 12px 25px;
-    border-radius: 4px;
-    border: 1px solid tomato;
-    outline: 2px solid white;
-    list-style: none;
-}
-
-.nav-profile-dropdown li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-}
-
-.nav-profile-dropdown li:hover {
-    color: tomato;
-} 
-
-@media (max-width:1050px) {
+@media (max-width: 750px) {
     .navbar {
-        width: 140px;
+        flex-direction: row;
+        justify-content: space-between;
     }
-    .navbar-menu {
-        gap: 20px;
-        font-size: 17px;
-        padding-left: 60px;
-    }
-    .navbar-right {
-        gap: 30px;
-        padding-left: 60px;
-    }
-    .navbar-right button {
-        padding: 10px 35px;
-        white-space: nowrap;
-    }
-}
-
-@media (max-width:900px) {
-    .navbar {
-        width: 120px;
-    }
-    .navbar-menu {
-        gap: 15px;
-        font-size: 16px;
-    }
-    .navbar-right {
-        gap: 20px;
-        padding-left: 50px;
-    }
-    .navbar-right button {
-        padding: 8px 20px;
-    }
-}
-
-@media (max-width:750px) {
     .navbar-menu {
         display: none;
     }
+    .navbar-right {
+        margin-left: auto;
+    }
     .logo {
-        font-size: 2rem;
+        font-size: 2.5rem; /* Further reduced logo size */
+    }
+}
+
+@media (max-width: 390px) {
+    .navbar {
+        padding: 10px 5px; /* Adjust padding for small screens */
+    }
+    .navbar-menu {
+        gap: 10px;
+        font-size: 14px;
+    }
+    .navbar button {
+        font-size: 12px;
+        padding: 6px 12px; /* Adjust button padding */
+    }
+    .logo {
+        font-size: 2rem; /* Further reduced logo size */
     }
 }
