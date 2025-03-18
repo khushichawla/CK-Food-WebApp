@@ -3,6 +3,7 @@ import './MyOrders.css'
 import { StoreContext } from '../../context/StoreContext';
 import { GoPackage } from "react-icons/go";
 import axios from 'axios'
+import { toast } from 'react-toastify';
 
 const MyOrders = () => {
     const {url, token} = useContext(StoreContext)
@@ -35,12 +36,23 @@ const MyOrders = () => {
             fetchOrders();
         }
     },[token])
+
+    useEffect(() => {
+        const pendingOrApprovedOrders = data.filter(order => order.status === "Order Pending" || order.status === "Order Approved");
+        if (pendingOrApprovedOrders.length > 0) {
+            toast.info("Reminder: Please make the payment for your pending or approved orders.");
+        }
+    }, [data]);
+
+    // removing orders with status 'Canceled'
+    const filteredOrders = data
+          .filter(data => data.status !== "Canceled")
     
   return (
     <div className='my-orders'>
       <h2>My Orders</h2>
       <div className='container'>
-        {data.map((order, index)=>{
+        {filteredOrders.map((order, index)=>{
             return (
                 <div key={index} className='my-orders-order'>
                     <span className="icon"><GoPackage /></span>

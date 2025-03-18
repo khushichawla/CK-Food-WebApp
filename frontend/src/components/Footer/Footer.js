@@ -10,12 +10,11 @@ const Footer = () => {
             <p>CKFood is committed to quality, every dish is lovingly homemade using fresh ingredients. With a focus on flavor and nutrition, CKFood offers a variety of vibrant, wholesome options that cater to diverse tastes. Whether you're looking for a quick lunch or a hearty dinner, CKFood ensures that every bite is a celebration of health and flavor, bringing the joy of wholesome eating right to your doorstep.</p>
         </div>
         <div className='footer-content-center'>
-            <h2>COMPANY</h2>
+            <h2>PAYMENT METHODS</h2>
             <ul>
-                <li>Home</li>
-                <li>About Us</li>
-                <li>Delivery</li>
-                <li>Privacy Policy</li>
+                <li>FPS</li>
+                <li>Cash</li>
+                <li>Alipay</li>
             </ul>
         </div>
         <div className='footer-content-right'>

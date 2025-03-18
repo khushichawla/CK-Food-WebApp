@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import './LoginPage.css';
 import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const { url, setToken, setUserRole } = useContext(StoreContext);
@@ -12,7 +12,7 @@ const LoginPage = () => {
     phone: "",
     password: ""
   });
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const onChangeHandler = (event) => {
     const name = event.target.name;
@@ -20,8 +20,18 @@ const LoginPage = () => {
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const validatePhoneNumber = (phone) => {
+    const phonePattern = /^\d{8}$/; // RegEx for exactly 8 digits
+    return phonePattern.test(phone); // Returns true if valid
+  };
+
   const onLogin = async (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
+
+    if (!validatePhoneNumber(data.phone)) {
+      alert("Please enter a valid number.");
+      return; // Exit the function if validation fails
+    }
 
     const newUrl = currState === "Login" ? `${url}/api/user/login` : `${url}/api/user/register`;
 
@@ -29,11 +39,10 @@ const LoginPage = () => {
       const response = await axios.post(newUrl, data);
       if (response.data.success) {
         setToken(response.data.token);
-        setUserRole(response.data.role); // Set the user role in context
+        setUserRole(response.data.role);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userRole", response.data.role);
 
-        // Navigate based on role
         navigate(response.data.role === "Admin" ? "/add" : "/");
       } else {
         alert(response.data.message);
@@ -65,7 +74,7 @@ const LoginPage = () => {
             name='phone'
             onChange={onChangeHandler}
             value={data.phone}
-            type='phone'
+            type='tel' // Use 'tel' for phone input
             placeholder='Your phone number'
             required
           />
