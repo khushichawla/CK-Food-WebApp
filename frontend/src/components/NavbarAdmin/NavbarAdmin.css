@@ -12,7 +12,15 @@
     align-items: left;
 }
 
-.navbar .logo {
+/* .navbar .logo {
     width: max(10%, 80px);
-}
+} */
 
+@media (max-width:600px) {
+    .logo {
+        font-size: 2rem;
+    }
+    .profile {
+        margin-right: 40px;
+    }
+}

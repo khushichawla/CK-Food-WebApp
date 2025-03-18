@@ -1,7 +1,9 @@
 import React from "react";
 import "./Header.css";
+// import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  // const navigate = useNavigate();
   return (
     <div className="header">
       <div className="header-contents">
@@ -11,7 +13,7 @@ const Header = () => {
           delectable array of dishes crafted with the finest ingredients and
           homely vibes.
         </p>
-        <button>View Menu</button>
+        {/* <button onClick={() => navigate("/#explore-menu")}>View Menu</button> */}
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import FoodItem from "../FoodItem/FoodItem";
 
 const FoodDisplay = ({ category }) => {
   const { food_list } = useContext(StoreContext);
-  console.log(food_list);
+  // console.log(food_list);
   
   return (
     <div className="food-display" id="food-display">
@@ -14,7 +14,7 @@ const FoodDisplay = ({ category }) => {
         {food_list
           .filter(item => item.display) // Only include items where display is true
           .map((item, index) => {
-            console.log("Rendering item:", item);
+            // console.log("Rendering item:", item);
             if (category === "All" || category === item.category) {
               return (
                 <FoodItem

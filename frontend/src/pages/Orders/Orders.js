@@ -5,13 +5,12 @@ import { toast } from 'react-toastify';
 
 const Orders = ({ url }) => {
   const [orders, setOrders] = useState([]);
-  const [filter, setFilter] = useState("All"); // State for selected filter
+  const [filter, setFilter] = useState("All");
 
   const fetchAllOrders = async () => {
     try {
       const response = await axios.get(url + "/api/order/list");
       if (response.data.success) {
-        // Filter out canceled orders and sort by date
         const filteredOrders = response.data.data
           .filter(order => order.status !== "Canceled")
           .sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -38,7 +37,7 @@ const Orders = ({ url }) => {
 
   useEffect(() => {
     fetchAllOrders();
-  }, []); // Run once on mount
+  }, []);
 
   // Filter orders based on selected filter
   const filteredOrders = filter === "All" 
@@ -47,20 +46,23 @@ const Orders = ({ url }) => {
 
   return (
     <div className='order add'>
-      <h3>Order Page</h3>
+      <h3 className='heading'>Order Page:</h3>
 
-      {/* Filter Options as Buttons */}
+      {/* Filter Options as Dropdown */}
       <div className='filter-options'>
-        <span>Filter Orders: </span>
-        {["All", "Pending", "Approved", "Payment Received", "Delivered"].map(status => (
-          <button
-            key={status}
-            className={`filter-button ${filter === status ? 'active' : ''}`}
-            onClick={() => setFilter(status)}
-          >
-            {status}
-          </button>
-        ))}
+        <label htmlFor="order-filter">Filter Orders: </label>
+        <select 
+          id="order-filter" 
+          onChange={(e) => setFilter(e.target.value)} 
+          value={filter}
+          className="filter-dropdown"
+        >
+          {["All", "Order Pending", "Order Approved", "Payment Received", "Delivered"].map(status => (
+            <option key={status} value={status}>
+              {status}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className='order-list'>
@@ -79,14 +81,8 @@ const Orders = ({ url }) => {
                 <b>Phone:</b> {order.user?.phone} <br/>
                 <b>Date:</b> {new Date(order.date).toLocaleDateString()}
               </p>
-              <p className='order-item-phone'>
-                
-              </p>
-              <p className='order-item-date'>
-                
-              </p>
             </div>
-            <p>Items: {order.items.length} <br/>Price: ${order.amount}</p>
+            <p>Price: ${order.amount}</p>
             <select onChange={(event) => statusHandler(event, order._id)} value={order.status}>
               <option value="Order Pending">Pending</option>
               <option value="Order Approved">Approved</option>

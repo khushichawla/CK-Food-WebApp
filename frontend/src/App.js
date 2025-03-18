@@ -33,7 +33,7 @@ const App = () => {
 
   useEffect(() => {
     // This will run whenever token or userRole changes
-    console.log("Authentication state changed:", { token, userRole });
+    // console.log("Authentication state changed:", { token, userRole });
     setIsAuthenticated(!!token); // Update authentication state based on token
   }, [token, userRole]);
 
@@ -61,6 +61,7 @@ const App = () => {
         return (
           <>
             <div className="App">
+            <ToastContainer />
               <Navbar />
               <Routes>
                 <Route path="/" element={<Home />} />

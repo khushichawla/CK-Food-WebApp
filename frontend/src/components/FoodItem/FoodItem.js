@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import './FoodItem.css'
 import { CiCirclePlus } from "react-icons/ci";
 import { CiCircleMinus } from "react-icons/ci";
@@ -8,8 +8,8 @@ import { StoreContext } from '../../context/StoreContext';
 const FoodItem = ({ id, name, price, image }) => {
   const { cartItems, addToCart, removeFromCart, url } = useContext(StoreContext);
   
-  console.log("Cart Items:", cartItems);
-  console.log("Accessing Item ID:", id);
+//   console.log("Cart Items:", cartItems);
+//   console.log("Accessing Item ID:", id);
   
   const isItemInCart = cartItems && cartItems[id];
 
