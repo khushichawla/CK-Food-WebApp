@@ -1,6 +1,6 @@
 import userModel from "../models/userModel.js";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
 import validator from "validator";
 
 // login user
@@ -14,7 +14,7 @@ const loginUser = async (req, res) => {
       return res.json({ success: false, message: "User does not exist" });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    // const isMatch = await bcrypt.compare(password, user.password);
 
     if (password !== user.password) {
       return res.json({ success: false, message: "Incorrect phone or password. Please try again." });
@@ -53,9 +53,9 @@ const registerUser = async (req, res) => {
       });
     }
 
-    // encrypt the password by hashing it
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    // // encrypt the password by hashing it
+    // const salt = await bcrypt.genSalt(10);
+    // const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new userModel({
       name: name,
