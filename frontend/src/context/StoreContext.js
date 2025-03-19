@@ -5,7 +5,7 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
     const [cartItems, setCartItems] = useState({});
-    const [url] = useState("http://localhost:4000");
+    const [url] = useState("https://ck-food-webapp-backend.onrender.com");
     const [token, setToken] = useState("");
     const [userRole, setUserRole] = useState(""); // Add user role state
     const [food_list, setFoodlist] = useState([]);
