@@ -1,3 +1,4 @@
 # Ignore node_modules in admin
+.DS_Store
 admin/
 backend/node_modules/
