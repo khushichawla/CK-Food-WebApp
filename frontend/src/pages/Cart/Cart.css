@@ -3,6 +3,7 @@
 }
 
 .cart-items-title {
+    margin-top: 120px;
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
     align-items: center;
@@ -56,15 +57,41 @@
 .cart-total button {
     border: none;
     color: white;
-    background-color: tomato;
+    /* background-color: tomato; */
     width: max(15vw, 200px);
+    margin-top: 15px;
     padding: 12px 0px;
     border-radius: 4px;
     cursor: pointer;
 }
 
+.cart-buttons {
+    display: flex;
+    justify-content: space-between; /* Space elements to opposite sides */
+    align-items: center; /* Center items vertically */
+}
+.cart-buttons button:first-of-type {
+    background-color: tomato; /* Green for PLACE ORDER */
+    color: white;
+}
+
+.continue-button {
+    background-color: #007bff; /* Blue for CONTINUE BROWSING */
+    color: white;
+}
+
 @media (max-width:750px) {
     .cart-bottom {
         flex-direction: column-reverse;
+    }
+
+    .cart-buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: flex-start; /* Align buttons to the start */
+    }
+
+    .cart-buttons button {
+        width: 100%; /* Make buttons full width */
+        margin-top: 10px; /* Add space between buttons */
     }
 }

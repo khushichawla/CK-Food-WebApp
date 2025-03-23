@@ -1,16 +1,16 @@
-import React, { useContext, useState } from 'react';
-import './LoginPage.css';
-import { StoreContext } from '../../context/StoreContext';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import "./LoginPage.css";
+import { StoreContext } from "../../context/StoreContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const { url, setToken, setUserRole } = useContext(StoreContext);
-  const [currState, setCurrState] = useState("Sign Up");
+  const { url, setToken, setUserRole, resetCart } = useContext(StoreContext);
+  const [currState, setCurrState] = useState("Login");
   const [data, setData] = useState({
     name: "",
     phone: "",
-    password: ""
+    password: "",
   });
   const navigate = useNavigate();
 
@@ -33,7 +33,10 @@ const LoginPage = () => {
       return; // Exit the function if validation fails
     }
 
-    const newUrl = currState === "Login" ? `${url}/api/user/login` : `${url}/api/user/register`;
+    const newUrl =
+      currState === "Login"
+        ? `${url}/api/user/login`
+        : `${url}/api/user/register`;
 
     try {
       const response = await axios.post(newUrl, data);
@@ -42,6 +45,8 @@ const LoginPage = () => {
         setUserRole(response.data.role);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userRole", response.data.role);
+        resetCart();
+        // window.location.reload(); // This will refresh the page
 
         navigate(response.data.role === "Admin" ? "/add" : "/");
       } else {
@@ -54,46 +59,52 @@ const LoginPage = () => {
   };
 
   return (
-    <div className='login-popup'>
-      <form onSubmit={onLogin} className='login-popup-container'>
-        <div className='login-popup-title'>
+    <div className="login-popup">
+      <form onSubmit={onLogin} className="login-popup-container">
+        <div className="login-popup-title">
           <h2>{currState}</h2>
         </div>
-        <div className='login-popup-inputs'>
+        <div className="login-popup-inputs">
           {currState === "Login" ? null : (
             <input
-              name='name'
+              name="name"
               onChange={onChangeHandler}
               value={data.name}
-              type='text'
-              placeholder='Your name'
+              type="text"
+              placeholder="Your name"
               required
             />
           )}
           <input
-            name='phone'
+            name="phone"
             onChange={onChangeHandler}
             value={data.phone}
-            type='tel' // Use 'tel' for phone input
-            placeholder='Your phone number'
+            type="tel" // Use 'tel' for phone input
+            placeholder="Your phone number"
             required
           />
           <input
-            name='password'
+            name="password"
             onChange={onChangeHandler}
             value={data.password}
-            type='password'
-            placeholder='Your Password'
+            type="password"
+            placeholder="Your Password"
             required
           />
         </div>
-        <button type='submit'>
+        <button type="submit">
           {currState === "Sign Up" ? "Create account" : "Login"}
         </button>
-        {currState === 'Login' ? (
-          <p>Create a new account? <span onClick={() => setCurrState("Sign Up")}>Click here</span></p>
+        {currState === "Login" ? (
+          <p>
+            Create a new account?{" "}
+            <span onClick={() => setCurrState("Sign Up")}>Click here</span>
+          </p>
         ) : (
-          <p>Already have an account? <span onClick={() => setCurrState("Login")}>Login here</span></p>
+          <p>
+            Already have an account?{" "}
+            <span onClick={() => setCurrState("Login")}>Login here</span>
+          </p>
         )}
       </form>
     </div>

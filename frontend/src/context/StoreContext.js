@@ -64,6 +64,7 @@ const StoreContextProvider = (props) => {
     };
 
     const resetCart = () => {
+        console.log("Resetting cart...");
         setCartItems({});
     };
 

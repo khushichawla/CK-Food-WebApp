@@ -19,32 +19,40 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const placeOrder = async (event) => {
-    event.preventDefault();
-    let orderItems = [];
-    food_list.forEach((item) => {
-      if (cartItems[item._id] > 0) {
-        let itemInfo = { ...item };
-        itemInfo["quantity"] = cartItems[item._id];
-        orderItems.push(itemInfo);
-      }
-    });
-    // console.log(orderItems);
-    let orderData = {
-      items: orderItems,
-      amount: getTotalCartAmount() + 2,
-    };
+    const confirmPlaceOrder = window.confirm(
+      "Are you sure you want to place this order?"
+    );
 
-    let response = await axios.post(url + "/api/order/place", orderData, {
-      headers: { token },
-    });
-    if (response.data.success) {
-      // const {session_url} = response.data;
-      // window.location.replace(session_url);
-      resetCart();
-      toast.success("Order Placed Successfully");
-      navigate("/myorders");
-    } else {
-      alert("Please Sign Up or Login.");
+    if (confirmPlaceOrder) {
+      event.preventDefault();
+      let orderItems = [];
+      food_list.forEach((item) => {
+        if (cartItems[item._id] > 0) {
+          let itemInfo = { ...item };
+          itemInfo["quantity"] = cartItems[item._id];
+          orderItems.push(itemInfo);
+        }
+      });
+
+      // console.log(orderItems);
+      let orderData = {
+        items: orderItems,
+        amount: getTotalCartAmount() + 2,
+      };
+
+      let response = await axios.post(url + "/api/order/place", orderData, {
+        headers: { token },
+      });
+
+      if (response.data.success) {
+        // const {session_url} = response.data;
+        // window.location.replace(session_url);
+        resetCart();
+        toast.success("Order Placed Successfully");
+        navigate("/myorders");
+      } else {
+        alert("Please Sign Up or Login.");
+      }
     }
   };
 
@@ -98,7 +106,17 @@ const Cart = () => {
           <h2>
             Total Items: <b>{getTotalCartQuantity()}</b>
           </h2>
-          <button onClick={placeOrder}>PLACE ORDER</button>
+          <div className="cart-buttons">
+            <button onClick={placeOrder}>PLACE ORDER</button>
+            <button
+              className="continue-button"
+              onClick={() => navigate("/#explore-menu")}
+            >
+              {getTotalCartQuantity() === 0
+                ? "ADD ITEMS TO CART"
+                : "CONTINUE BROWSING"}
+            </button>
+          </div>
         </div>
       </div>
     </div>

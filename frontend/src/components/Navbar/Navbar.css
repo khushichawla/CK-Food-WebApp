@@ -1,123 +1,130 @@
 .navbar {
-    padding: 10px 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  position: fixed;
+  top: 0; /* Align it to the top of the viewport */
+  left: 0; /* Align it to the left */
+  right: 0; /* Align it to the right */
+  background-color: #ffffff; /* Background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  z-index: 1000; /* Ensure it stays above other content */
 }
 
 .logo {
-    font-size: 3rem; /* Reduced logo size */
-    font-weight: 800;
-    color: #f69b2c;
-    cursor: pointer;
+  font-size: 3rem; /* Reduced logo size */
+  font-weight: 800;
+  color: #f69b2c;
+  cursor: pointer;
 }
 
 .navbar-menu {
-    display: flex;
-    list-style: none;
-    gap: 15px;
-    color: black;
-    font-size: 16px;
+  display: flex;
+  list-style: none;
+  gap: 15px;
+  color: black;
+  font-size: 16px;
 }
 
 .navbar-menu a,
 .navbar-menu .active {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 .navbar-right {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Adjusted gap between icons */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjusted gap between icons */
 }
 
 .navbar-search-icon {
-    position: relative;
-    display: flex;
-    font-size: 20px;
+  position: relative;
+  display: flex;
+  font-size: 20px;
 }
 
 .navbar-search-icon .dot {
-    position: absolute;
-    min-width: 10px;
-    min-height: 10px;
-    background-color: tomato;
-    border-radius: 5px;
-    top: -10px;
-    right: -8px;
+  position: absolute;
+  min-width: 10px;
+  min-height: 10px;
+  background-color: tomato;
+  border-radius: 5px;
+  top: -10px;
+  right: -8px;
 }
 
 .navbar-icons {
-    /* display: flex; */
-    align-items: center;
-    gap: 10px;
+  /* display: flex; */
+  align-items: center;
+  gap: 10px;
 }
 
 .navbar-icons svg {
-    font-size: 20px; /* Uniform icon size */
-    color: black;
-    cursor: pointer;
+  font-size: 20px; /* Uniform icon size */
+  color: black;
+  cursor: pointer;
 }
 
 .navbar-icons svg:hover {
-    color: #f69b2c;
+  color: #f69b2c;
 }
 
 .navbar button {
-    background: transparent;
-    font-size: 14px;
-    color: black;
-    border: 1px solid #f69b2c;
-    padding: 8px 15px; /* Adjusted padding */
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.3s;
+  background: transparent;
+  font-size: 14px;
+  color: black;
+  border: 1px solid #f69b2c;
+  padding: 8px 15px; /* Adjusted padding */
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .navbar button:hover {
-    background-color: #fbd19e;
+  background-color: #fbd19e;
 }
 
 .navbar .active {
-    padding-bottom: 2px;
-    border-bottom: 2px solid black;
+  padding-bottom: 2px;
+  border-bottom: 2px solid black;
 }
 
 .navbar li {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 @media (max-width: 750px) {
-    .navbar {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    .navbar-menu {
-        display: none;
-    }
-    .navbar-right {
-        margin-left: auto;
-    }
-    .logo {
-        font-size: 2.5rem; /* Further reduced logo size */
-    }
+  .navbar {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .navbar-menu {
+    display: none;
+  }
+  .navbar-right {
+    margin-left: auto;
+  }
+  .logo {
+    font-size: 2.5rem; /* Further reduced logo size */
+  }
 }
 
 @media (max-width: 390px) {
-    .navbar {
-        padding: 10px 5px; /* Adjust padding for small screens */
-    }
-    .navbar-menu {
-        gap: 10px;
-        font-size: 14px;
-    }
-    .navbar button {
-        font-size: 12px;
-        padding: 6px 12px; /* Adjust button padding */
-    }
-    .logo {
-        font-size: 2rem; /* Further reduced logo size */
-    }
+  .navbar {
+    padding: 5px 5px; /* Adjust padding for small screens */
+  }
+  .navbar-menu {
+    gap: 10px;
+    font-size: 14px;
+  }
+  .navbar button {
+    font-size: 12px;
+    padding: 6px 12px; /* Adjust button padding */
+  }
+  .logo {
+    font-size: 2rem; /* Further reduced logo size */
+  }
 }
