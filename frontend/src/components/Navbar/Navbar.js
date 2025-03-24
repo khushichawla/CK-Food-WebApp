@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import "./Navbar.css";
 import { FaShoppingCart } from "react-icons/fa";
-import { IoPersonSharp } from "react-icons/io5";
+// import { IoPersonSharp } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io"; // Logout icon
 import { FaClipboardList } from "react-icons/fa"; // Orders icon
 import { Link, useNavigate } from "react-router-dom";
