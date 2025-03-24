@@ -20,7 +20,7 @@ import { StoreContext } from './context/StoreContext'; // Import StoreContext
 const App = () => {
   const { token, userRole, setUserRole } = useContext(StoreContext); 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const url = "http://localhost:4000";
+  const url = "https://ck-food-webapp-backend.onrender.com";
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
