@@ -9,7 +9,8 @@ import { StoreContext } from "../../context/StoreContext";
 
 const Navbar = () => {
   const [menu, setMenu] = useState("home");
-  const { getTotalCartAmount, token, setToken, resetCart } = useContext(StoreContext);
+  const { getTotalCartAmount, token, setToken, resetCart } =
+    useContext(StoreContext);
   const navigate = useNavigate();
 
   const logout = () => {

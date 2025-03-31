@@ -37,7 +37,7 @@ const Cart = () => {
       // console.log(orderItems);
       let orderData = {
         items: orderItems,
-        amount: getTotalCartAmount() + 2,
+        amount: getTotalCartAmount(),
       };
 
       let response = await axios.post(url + "/api/order/place", orderData, {

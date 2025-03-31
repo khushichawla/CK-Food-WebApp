@@ -52,7 +52,7 @@ const App = () => {
                 <Route path="/list" element={<List url={url} />} />
                 <Route path="/orders" element={<Orders url={url} />} />
                 <Route path="/summary" element={<Summary url={url} />} />
-                <Route path="*" element={<Navigate to="/add" />} />
+                {/* <Route path="*" element={<Navigate to="/add" />} /> */}
               </Routes>
             </div>
           </>
@@ -68,7 +68,7 @@ const App = () => {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/order" element={<PlaceOrder />} />
                 <Route path="/myorders" element={<MyOrders />} />
-                <Route path="*" element={<Navigate to="/" />} />
+                {/* <Route path="*" element={<Navigate to="/" />} /> */}
               </Routes>
             </div>
           </>
@@ -78,7 +78,15 @@ const App = () => {
       return (
         <Routes>
           <Route path="/login" element={<LoginPage />} />
-          <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/cart" element={<LoginPage />} />
+          <Route path="/myorders" element={<LoginPage />} />
+          <Route path="/add" element={<LoginPage />} />
+          <Route path="/list" element={<LoginPage />} />
+          <Route path="/orders" element={<LoginPage />} />
+          <Route path="/summary" element={<LoginPage />} />
+          
+          {/* <Route path="*" element={<Navigate to="/login" />} /> */}
         </Routes>
       );
     }
