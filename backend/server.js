@@ -1,11 +1,17 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRoute.js";
 import userRouter from "./routes/userRoute.js";
 import "dotenv/config";
 import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // app config
 const app = express();
@@ -26,8 +32,16 @@ app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 
 // http method to request data from server, other methods like delete, post etc
-app.get("/", (req, res) => {
-  res.send("API Working");
+// app.get("/", (req, res) => {
+//   res.send("API Working");
+// });
+
+// Serve static files from the React app (located in the frontend/build directory)
+app.use(express.static(path.join(__dirname, 'frontend', 'build')));
+
+// Catch-all handler for any requests that don't match an API route
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
 });
 
 app.listen(port, () => {
