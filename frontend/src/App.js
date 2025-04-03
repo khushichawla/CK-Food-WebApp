@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import NavbarAdmin from './components/NavbarAdmin/NavbarAdmin';
 import Sidebar from './components/Sidebar/Sidebar';
