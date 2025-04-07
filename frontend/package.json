@@ -41,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "csso": "^5.0.5",
     "fork-ts-checker-webpack-plugin": "^9.0.3"
   }
 }
