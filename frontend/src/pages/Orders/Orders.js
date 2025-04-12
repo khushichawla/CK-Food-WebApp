@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 const Orders = ({ url }) => {
   const [orders, setOrders] = useState([]);
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("Order Pending");
 
   const fetchAllOrders = async () => {
     try {

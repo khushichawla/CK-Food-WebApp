@@ -12,7 +12,9 @@ const Summary = ({url}) => {
           const response = await axios.get(url + "/api/order/list");
           if (response.data.success) {
             const filteredOrders = response.data.data
-              .filter(order => order.status !== "Canceled")
+            .filter(order => 
+                order.status === "Order Approved" || order.status === "Payment Received"
+            )
               .sort((a, b) => new Date(b.date) - new Date(a.date));
     
             setOrders(filteredOrders);

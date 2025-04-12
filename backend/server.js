@@ -40,7 +40,7 @@ app.use("/api/order", orderRouter);
 app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 
 // Catch-all handler for any requests that don't match an API route
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
 });
 
